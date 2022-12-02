@@ -1,41 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        tools:context=".MainActivity">
+        xmlns:bind="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+                name="viewModel"
+                type="com.diana.ukrainsky.hw1.ui.LoginViewModel"/>
+        <import type="android.content.Context" />
+    </data>
 
 
     <LinearLayout
-            android:orientation="horizontal"
-            android:gravity="center"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        <TextView
-                android:id="@+id/activityMain_TXT_enterPassword"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            tools:context=".ui.MainActivity"
+            android:background="#F5EBE0">
+
+
+        <LinearLayout
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="20dp">
+
+            <EditText
+                    android:id="@+id/activityMain_EDT_password"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:hint="@string/enter_password"
+                    android:inputType="textPassword"
+                    android:text="@={viewModel.userPassword}"/>
+
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+                style="@style/Widget.Material3.Button.ElevatedButton"
+                android:id="@+id/activityMain_BTN_enter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Enter Password: "
-                android:gravity="center"/>
-        <EditText
-                android:id="@+id/activityMain_EDT_password"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:hint="Enter password"/>
+                android:layout_gravity="center"
+                android:textSize="15sp"
+                android:textColor="#CE7777"
+                android:text="@string/enter"
+                android:onClick="@{()-> viewModel.onLoginClicked(context)}"
+                bind:toastMessage="@{viewModel.toastMessage}" />
+
 
     </LinearLayout>
 
-
-
-    <com.google.android.material.button.MaterialButton
-            android:id="@+id/activityMain_BTN_enter"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Enter"/>
-
-
-</LinearLayout>
+</layout>
